@@ -1,6 +1,6 @@
-# docker-template
+# docker-openstackclient
 
-[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-osism%2Ftemplate-blue.svg)](https://hub.docker.com/r/osism/template/)
+[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-osism%2Fopenstackclient-blue.svg)](https://hub.docker.com/r/osism/openstackclient/)
 
 License
 -------
