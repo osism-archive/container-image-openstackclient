@@ -28,14 +28,14 @@ RUN apt-get update \
     && groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon \
     && apt-get clean \
-    && mkdir /credentials \
+    && mkdir /configuration \
     && rm -rf \
       /var/lib/apt/lists/* \
       /var/tmp/*
 
 USER dragon
-WORKDIR /credentials
+WORKDIR /configuration
 
-VOLUME ["/credentials"]
+VOLUME ["/configuration"]
 
-CMD ["/run.sh"]
+ENTRYPOINT ["/run.sh"]
