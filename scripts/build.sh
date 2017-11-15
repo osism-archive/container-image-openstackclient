@@ -28,4 +28,5 @@ fi
 docker build \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$VERSION" \
+    --squash \
     $BUID_OPTS .
