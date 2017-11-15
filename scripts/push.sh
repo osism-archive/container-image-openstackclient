@@ -14,6 +14,7 @@ set -x
 # Set default values
 
 BUILD_OPTS=${BUILD_OPTS:-}
+REPOSITORY=${REPOSITORY:-osism/openstackclient}
 
 # https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
 version-from-dockerfile() {
