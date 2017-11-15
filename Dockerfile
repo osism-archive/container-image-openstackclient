@@ -22,9 +22,36 @@ RUN apt-get update \
         software-properties-common \
     && add-apt-repository cloud-archive:$VERSION \
     && apt-get update \
-    && apt-get install -y \
-        python-openstackclient \
-        python-heatclient \
+    && apt-get install -y --ignore-missing \
+      python-aodhclient \
+      python-barbicanclient \
+      python-ceilometerclient \
+      python-cinderclient \
+      python-congressclient \
+      python-designateclient \
+      python-glanceclient \
+      python-glareclient \
+      python-gnocchiclient \
+      python-heatclient \
+      python-ironic-inspector-client \
+      python-ironicclient \
+      python-keystoneclient \
+      python-magnumclient \
+      python-manilaclient \
+      python-mistralclient \
+      python-monascaclient \
+      python-muranoclient \
+      python-neutronclient \
+      python-novaclient \
+      python-openstackclient \
+      python-saharaclient \
+      python-senlinclient \
+      python-swiftclient \
+      python-tackerclient \
+      python-troveclient \
+      python-watcherclient \
+      python-zaqarclient \
+      python-zunclient \
     && groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon \
     && apt-get clean \
