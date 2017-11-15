@@ -30,7 +30,7 @@ RUN apt-get update \
       python-congressclient \
       python-designateclient \
       python-glanceclient \
-      python-glareclient \
+#      python-glareclient \
       python-gnocchiclient \
       python-heatclient \
       python-ironic-inspector-client \
@@ -51,7 +51,7 @@ RUN apt-get update \
       python-troveclient \
       python-watcherclient \
       python-zaqarclient \
-      python-zunclient \
+#      python-zunclient \
     && groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon \
     && apt-get clean \
