@@ -44,6 +44,7 @@ RUN apt-get update \
       python-neutronclient \
       python-novaclient \
       python-openstackclient \
+      python-pankoclient \
       python-saharaclient \
       python-senlinclient \
       python-swiftclient \
