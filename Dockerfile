@@ -14,15 +14,16 @@ ENV GROUP_ID ${GROUP_ID:-45000}
 
 USER root
 
-ADD files/run.sh /run.sh
-
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y \
+        git \
         software-properties-common \
+        python-pip \
     && add-apt-repository cloud-archive:$VERSION \
-    && apt-get update \
-    && apt-get install -y --ignore-missing \
+    && apt-get update
+
+RUN apt-get install -y --ignore-missing \
       python-aodhclient \
       python-barbicanclient \
       python-ceilometerclient \
@@ -30,7 +31,6 @@ RUN apt-get update \
       python-congressclient \
       python-designateclient \
       python-glanceclient \
-#      python-glareclient \
       python-gnocchiclient \
       python-heatclient \
       python-ironic-inspector-client \
@@ -44,19 +44,28 @@ RUN apt-get update \
       python-neutronclient \
       python-novaclient \
       python-openstackclient \
-      python-pankoclient \
       python-saharaclient \
       python-senlinclient \
       python-swiftclient \
       python-tackerclient \
       python-troveclient \
       python-watcherclient \
-      python-zaqarclient \
-#      python-zunclient \
-    && groupadd -g $GROUP_ID dragon \
-    && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon \
-    && apt-get clean \
+      python-zaqarclient
+
+#      python-glareclient
+#      python-zunclient
+
+# NOTE(berendt): pankoclient is not yet part of the ubuntu cloud archive
+RUN pip install pankoclient
+
+RUN pip install git+https://git.openstack.org/openstack/ospurge
+
+RUN groupadd -g $GROUP_ID dragon \
+    && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
+
+RUN apt-get clean \
     && mkdir /configuration \
+    && chown -R dragon: /configuration \
     && rm -rf \
       /var/lib/apt/lists/* \
       /var/tmp/*
@@ -66,4 +75,4 @@ WORKDIR /configuration
 
 VOLUME ["/configuration"]
 
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["openstack"]
