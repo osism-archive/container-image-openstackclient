@@ -17,6 +17,7 @@ env:
   global:
     - REPOSITORY=osism/openstackclient
   matrix:
+    - VERSION=queens
     - VERSION=pike
     - VERSION=ocata
 
