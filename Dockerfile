@@ -14,16 +14,16 @@ ENV GROUP_ID ${GROUP_ID:-45000}
 
 USER root
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y \
+RUN apt update \
+    && apt upgrade -y \
+    && apt install -y \
         git \
         software-properties-common \
         python-pip \
     && add-apt-repository cloud-archive:$VERSION \
-    && apt-get update
+    && apt update
 
-RUN apt-get install -y --ignore-missing \
+RUN apt install -y --ignore-missing \
       python-aodhclient \
       python-barbicanclient \
       python-ceilometerclient \
@@ -63,7 +63,7 @@ RUN pip install git+https://git.openstack.org/openstack/ospurge
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
 
-RUN apt-get clean \
+RUN apt clean \
     && mkdir /configuration \
     && chown -R dragon: /configuration \
     && rm -rf \
