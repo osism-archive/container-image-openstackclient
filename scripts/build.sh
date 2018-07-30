@@ -15,7 +15,7 @@ set -x
 # Set default values
 
 BUILD_OPTS=${BUILD_OPTS:-}
-REPOSITORY=${REPOSITORY:-osism/openstackclient}
+HASH_REPOSITORY=$(git rev-parse --short HEAD)
 
 # https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
 version-from-dockerfile() {
@@ -28,6 +28,7 @@ fi
 
 docker build \
     --build-arg "VERSION=$VERSION" \
+    --label "io.osism.${REPOSITORY#osism/}=$HASH_REPOSITORY" \
     --tag "$REPOSITORY:$VERSION" \
     --squash \
     $BUID_OPTS .
