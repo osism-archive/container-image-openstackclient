@@ -12,7 +12,6 @@ env:
   matrix:
     - VERSION=queens
     - VERSION=pike
-    - VERSION=ocata
 
 script:
   - bash scripts/build.sh
