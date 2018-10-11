@@ -1,4 +1,5 @@
-FROM ubuntu:16.04
+ARG UBUNTU_RELEASE=16.04
+FROM ubuntu:${UBUNTU_RELEASE}
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
