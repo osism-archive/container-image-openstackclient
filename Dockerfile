@@ -21,37 +21,8 @@ RUN apt update \
     && add-apt-repository cloud-archive:$VERSION \
     && apt update
 
-RUN apt install -y --ignore-missing \
-      python-aodhclient \
-      python-barbicanclient \
-      python-ceilometerclient \
-      python-cinderclient \
-      python-congressclient \
-      python-designateclient \
-      python-glanceclient \
-      python-gnocchiclient \
-      python-heatclient \
-      python-ironic-inspector-client \
-      python-ironicclient \
-      python-keystoneclient \
-      python-magnumclient \
-      python-manilaclient \
-      python-mistralclient \
-      python-monascaclient \
-      python-muranoclient \
-      python-neutronclient \
-      python-novaclient \
-      python-openstackclient \
-      python-saharaclient \
-      python-senlinclient \
-      python-swiftclient \
-      python-tackerclient \
-      python-troveclient \
-      python-watcherclient \
-      python-zaqarclient
-
-#      python-glareclient
-#      python-zunclient
+RUN apt-cache search --names-only 'python-.*client$' | grep -i OpenStack | awk '{print $1 }' | xargs apt install -y
+RUN for package in python-cloudkittyclient python-congressclient python-ironic-inspector-client python-karborclient python-magnumclient python-monascaclient python-muranoclient python-neutronclient; do apt install -y $package; done
 
 # NOTE(berendt): pankoclient is not yet part of the ubuntu cloud archive
 RUN pip install pankoclient
