@@ -16,6 +16,7 @@ RUN apt update \
     && apt upgrade -y \
     && apt install -y \
         git \
+        locales \
         software-properties-common \
         python-pip \
     && add-apt-repository cloud-archive:$VERSION \
@@ -31,6 +32,11 @@ RUN pip install git+https://git.openstack.org/openstack/ospurge
 
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
+
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
 
 RUN apt clean \
     && mkdir /configuration \
