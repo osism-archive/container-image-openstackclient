@@ -41,6 +41,7 @@ ENV LC_ALL en_US.UTF-8
 RUN apt clean \
     && mkdir /configuration \
     && chown -R dragon: /configuration \
+    && apt-get purge -y lib*-dev \
     && rm -rf \
       /var/lib/apt/lists/* \
       /var/tmp/*
