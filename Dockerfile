@@ -26,9 +26,10 @@ RUN apt-cache search --names-only 'python-.*client$' | grep -i OpenStack | awk '
 RUN for package in python-cloudkittyclient python-congressclient python-ironic-inspector-client python-karborclient python-magnumclient python-monascaclient python-muranoclient python-neutronclient; do apt install -y $package; done
 RUN apt-get remove --yes python-senlinclient python-tuskarclient
 
-RUN pip install python-freezerclient
+RUN pip --no-cache-dir install python-freezerclient
+RUN pip --no-cache-dir install pankoclient
 
-RUN pip install git+https://git.openstack.org/openstack/ospurge
+RUN pip --no-cache-dir install git+https://git.openstack.org/openstack/ospurge
 
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
