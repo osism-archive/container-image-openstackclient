@@ -1,9 +1,9 @@
-ARG UBUNTU_RELEASE=16.04
+ARG UBUNTU_RELEASE=18.04
 FROM ubuntu:${UBUNTU_RELEASE}
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
-ENV VERSION ${VERSION:-queens}
+ENV VERSION ${VERSION:-stein}
 
 ENV DEBIAN_FRONTEND noninteractive
 
