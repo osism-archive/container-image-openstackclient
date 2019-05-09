@@ -29,7 +29,7 @@ RUN apt-get remove --yes python-senlinclient python-tuskarclient
 RUN pip --no-cache-dir install python-freezerclient
 RUN pip --no-cache-dir install pankoclient
 
-RUN pip --no-cache-dir install git+https://git.openstack.org/openstack/ospurge
+RUN pip --no-cache-dir install git+https://opendev.org/x/ospurge.git
 
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
