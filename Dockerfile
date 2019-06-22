@@ -3,7 +3,7 @@ FROM ubuntu:${UBUNTU_RELEASE}
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
-ENV VERSION ${VERSION:-stein}
+ENV VERSION ${VERSION:-train}
 
 ENV DEBIAN_FRONTEND noninteractive
 
