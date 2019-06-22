@@ -40,6 +40,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN apt clean \
+    && apt autoremove --yes \
     && mkdir /configuration \
     && chown -R dragon: /configuration \
     && apt-get purge -y lib*-dev \
