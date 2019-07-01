@@ -18,27 +18,24 @@ RUN apt update \
         git \
         locales \
         software-properties-common \
-        python-pip \
+        python3-pip \
     && add-apt-repository cloud-archive:$VERSION \
     && apt update
 
-RUN apt-cache search --names-only 'python-.*client$' | grep -i OpenStack | awk '{print $1 }' | xargs apt install -y
+RUN apt-cache search --names-only 'python3-.*client$' | grep -i OpenStack | awk '{print $1 }' | xargs apt install -y
 RUN for package in \
-        python-cloudkittyclient \
-        python-congressclient \
-        python-ironic-inspector-client \
-        python-karborclient \
-        python-magnumclient \
-        python-monascaclient \
-        python-muranoclient \
-        python-neutronclient; \
+        python3-cloudkittyclient \
+        python3-congressclient \
+        python3-ironic-inspector-client \
+        python3-karborclient \
+        python3-magnumclient \
+        python3-monascaclient \
+        python3-muranoclient \
+        python3-neutronclient; \
     do apt install -y $package; done
-RUN apt-get remove --yes python-senlinclient python-tuskarclient
 
-RUN pip --no-cache-dir install python-freezerclient
-RUN pip --no-cache-dir install pankoclient
-
-RUN pip --no-cache-dir install git+https://opendev.org/x/ospurge.git
+RUN pip3 --no-cache-dir install python-freezerclient
+RUN pip3 --no-cache-dir install git+https://opendev.org/x/ospurge.git
 
 RUN groupadd -g $GROUP_ID dragon \
     && useradd -g dragon -u $USER_ID -m -d /home/dragon dragon
