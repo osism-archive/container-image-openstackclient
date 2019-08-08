@@ -15,6 +15,7 @@ USER root
 RUN apt update \
     && apt upgrade -y \
     && apt install -y \
+        dumb-init \
         git \
         locales \
         software-properties-common \
@@ -59,4 +60,5 @@ WORKDIR /configuration
 
 VOLUME ["/configuration"]
 
-ENTRYPOINT ["openstack"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["openstack"]
