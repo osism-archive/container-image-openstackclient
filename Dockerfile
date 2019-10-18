@@ -52,7 +52,6 @@ ENV LC_ALL en_US.UTF-8
 
 RUN apt-get clean \
     && apt-get autoremove --yes \
-    && apt-get purge -y lib*-dev \
     && rm -rf \
       /var/tmp/*
 
