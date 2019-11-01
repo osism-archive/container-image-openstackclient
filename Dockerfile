@@ -29,7 +29,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && rm -rf /requirements \
       /requirements.txt \
       /packages.txt \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && openstack complete > /osc.bash_completion
 
 RUN addgroup -g $GROUP_ID dragon \
     && adduser -D -u $USER_ID -G dragon dragon \
