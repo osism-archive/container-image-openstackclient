@@ -16,8 +16,6 @@ RUN apk add --no-cache --virtual .build-deps \
       openssl-dev \
       python3-dev \
     && apk add --no-cache \
-      bash \
-      bash-completion \
       dumb-init \
     && mkdir /requirements \
     && tar xzf /requirements.tar.gz -C /requirements --strip-components=1 \
