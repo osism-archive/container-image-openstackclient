@@ -24,6 +24,7 @@ RUN apk add --no-cache --virtual .build-deps \
          grep -q "$package" /requirements/upper-constraints.txt && \
          echo "$package" >> /packages.txt; \
        done < /requirements.txt \
+    && if [ $VERSION = "rocky" ]; then sed -i '/^python-vitrageclient/d' /requirements/upper-constraints.txt; echo 'python-vitrageclient===2.7.0' >> /requirements/upper-constraints.txt; fi \
     && if [ $VERSION = "rocky" ]; then sed -i '/^cmd2/d' /requirements/upper-constraints.txt; echo 'cmd2===0.8.9' >> /requirements/upper-constraints.txt; fi \
     && pip3 --no-cache-dir install -c /requirements/upper-constraints.txt -r /packages.txt \
     && pip3 --no-cache-dir install -c /requirements/upper-constraints.txt ospurge \
