@@ -9,6 +9,7 @@ env:
   global:
     - REPOSITORY=osism/openstackclient
   matrix:
+    - VERSION=latest
     - VERSION=rocky
     - VERSION=stein
     - VERSION=train
