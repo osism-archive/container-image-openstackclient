@@ -1,14 +1,12 @@
 FROM python:3.7-alpine
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
-ARG VERSION
-ENV VERSION ${VERSION:-train}
+ARG VERSION=latest
 
 ENV USER_ID ${USER_ID:-45000}
 ENV GROUP_ID ${GROUP_ID:-45000}
 
 COPY files/requirements.txt /requirements.txt
-ADD http://tarballs.openstack.org/requirements/requirements-stable-${VERSION}.tar.gz /requirements.tar.gz
 
 RUN apk add --no-cache --virtual .build-deps \
       build-base \
@@ -17,6 +15,8 @@ RUN apk add --no-cache --virtual .build-deps \
       python3-dev \
     && apk add --no-cache \
       dumb-init \
+    && if [ $VERSION = "latest" ]; then wget -P / -O requirements.tar.gz http://tarballs.openstack.org/requirements/requirements-master.tar.gz; fi \
+    && if [ $VERSION != "latest" ]; then wget -P / -O requirements.tar.gz http://tarballs.openstack.org/requirements/requirements-stable-${VERSION}.tar.gz; fi \
     && mkdir /requirements \
     && tar xzf /requirements.tar.gz -C /requirements --strip-components=1 \
     && rm -rf /requirements.tar.gz \

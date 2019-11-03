@@ -1,6 +1,7 @@
 ---
 docker_image_name: openstackclient
 versions:
+ - latest
  - rocky
  - stein
  - train
