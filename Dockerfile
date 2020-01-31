@@ -1,5 +1,4 @@
 FROM python:3.7-alpine
-LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION=latest
 
@@ -46,3 +45,9 @@ VOLUME ["/configuration"]
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["openstack"]
+
+LABEL "org.opencontainers.image.documentation"="https://docs.osism.io" \
+      "org.opencontainers.image.licenses"="ASL 2.0" \
+      "org.opencontainers.image.source"="https://github.com/osism/docker-openstackclient" \
+      "org.opencontainers.image.url"="https://www.osism.de" \
+      "org.opencontainers.image.vendor"="Betacloud Solutions GmbH"
