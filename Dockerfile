@@ -2,8 +2,8 @@ FROM python:3.7-alpine
 
 ARG VERSION=latest
 
-ENV USER_ID ${USER_ID:-45000}
-ENV GROUP_ID ${GROUP_ID:-45000}
+ARG USER_ID=45000
+ARG GROUP_ID=45000
 
 COPY files/requirements.txt /requirements.txt
 
