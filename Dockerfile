@@ -1,4 +1,5 @@
-FROM python:3.7-alpine
+ARG PYTHON_VERSION=3.7
+FROM python:${PYTHON_VERSION}-alpine
 
 ARG VERSION=latest
 
