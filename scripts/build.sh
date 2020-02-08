@@ -6,6 +6,7 @@ set -x
 # Available environment variables
 #
 # BUILD_OPTS
+# PYTHON_VERSION
 # REPOSITORY
 # VERSION
 
@@ -13,10 +14,12 @@ set -x
 
 BUILD_OPTS=${BUILD_OPTS:-}
 CREATED=$(date --rfc-3339=ns)
+PYTHON_VERSION=${PYTHON_VERSION:-3.7}
 REVISION=$(git rev-parse --short HEAD)
 VERSION=${VERSION:-latest}
 
 docker build \
+    --build-arg "PYTHON_VERSION=$PYTHON_VERSION" \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$VERSION" \
     --label "org.opencontainers.image.created=$CREATED" \
