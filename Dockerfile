@@ -8,13 +8,14 @@ ARG GROUP_ID=45000
 
 COPY files/requirements.txt /requirements.txt
 
-RUN apk add --no-cache --virtual .build-deps \
+RUN apk add --no-cache \
+      dumb-init \
+      libstdc++ \
+    && apk add --no-cache --virtual .build-deps \
       build-base \
       libffi-dev \
       openssl-dev \
       python3-dev \
-    && apk add --no-cache \
-      dumb-init \
     && if [ $VERSION = "latest" ]; then wget -P / -O requirements.tar.gz http://tarballs.openstack.org/requirements/requirements-master.tar.gz; fi \
     && if [ $VERSION != "latest" ]; then wget -P / -O requirements.tar.gz http://tarballs.openstack.org/requirements/requirements-stable-${VERSION}.tar.gz; fi \
     && mkdir /requirements \
