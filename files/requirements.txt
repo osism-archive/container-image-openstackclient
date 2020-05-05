@@ -5,6 +5,7 @@ python-barbicanclient
 python-blazarclient
 python-ceilometerclient
 python-cinderclient
+python-cloudkittyclient
 python-congressclient
 python-designateclient
 python-freezerclient
