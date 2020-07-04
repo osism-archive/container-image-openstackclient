@@ -9,11 +9,11 @@ env:
   global:
     - REPOSITORY=osism/openstackclient
   matrix:
-    - VERSION=latest PYTHON_VERSION=3.7
-    - VERSION=rocky PYTHON_VERSION=3.6
-    - VERSION=stein PYTHON_VERSION=3.7
-    - VERSION=train PYTHON_VERSION=3.7
-    - VERSION=ussuri PYTHON_VERSION=3.7
+    - VERSION=latest
+    - VERSION=rocky
+    - VERSION=stein
+    - VERSION=train
+    - VERSION=ussuri
 
 before_script:
   - bash scripts/lint.sh
@@ -27,11 +27,3 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.org#osism"
-    template:
-      - "%{result} %{repository_slug}: %{commit_subject} %{build_url}"
-    skip_join: true
