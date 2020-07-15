@@ -23,7 +23,7 @@ RUN apk add --no-cache \
     && rm -rf /requirements.tar.gz \
     && while read -r package; do \
          grep -q "$package" /requirements/upper-constraints.txt && \
-         echo "$package" >> /packages.txt; \
+         echo "$package" >> /packages.txt || true; \
        done < /requirements.txt \
     && if [ $VERSION = "rocky" ]; then sed -i '/^python-vitrageclient/d' /requirements/upper-constraints.txt; echo 'python-vitrageclient===2.7.0' >> /requirements/upper-constraints.txt; fi \
     && if [ $VERSION = "rocky" ]; then sed -i '/^cmd2/d' /requirements/upper-constraints.txt; echo 'cmd2===0.8.9' >> /requirements/upper-constraints.txt; fi \
