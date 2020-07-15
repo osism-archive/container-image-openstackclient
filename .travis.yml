@@ -9,7 +9,7 @@ env:
   global:
     - REPOSITORY=osism/openstackclient
   matrix:
-    - VERSION=latest PYTHON_VERSION=3.7
+    - VERSION=latest PYTHON_VERSION=3.8
     - VERSION=rocky PYTHON_VERSION=3.6
     - VERSION=stein PYTHON_VERSION=3.7
     - VERSION=train PYTHON_VERSION=3.7
