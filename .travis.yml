@@ -14,6 +14,7 @@ env:
     - VERSION=stein PYTHON_VERSION=3.7
     - VERSION=train PYTHON_VERSION=3.7
     - VERSION=ussuri PYTHON_VERSION=3.7
+    - VERSION=victoria PYTHON_VERSION=3.8
 
 before_script:
   - bash scripts/lint.sh
