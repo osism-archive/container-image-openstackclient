@@ -25,6 +25,7 @@ if [[ -n $DOCKER_REGISTRY ]]; then
 fi
 
 docker buildx build \
+    --load \
     --build-arg "PYTHON_VERSION=$PYTHON_VERSION" \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$VERSION" \
