@@ -50,6 +50,6 @@ CMD ["openstack"]
 
 LABEL "org.opencontainers.image.documentation"="https://docs.osism.de" \
       "org.opencontainers.image.licenses"="ASL 2.0" \
-      "org.opencontainers.image.source"="https://github.com/osism/docker-openstackclient" \
+      "org.opencontainers.image.source"="https://github.com/osism/docker-image-openstackclient" \
       "org.opencontainers.image.url"="https://www.osism.de" \
       "org.opencontainers.image.vendor"="Betacloud Solutions GmbH"
