@@ -41,7 +41,7 @@ jobs:
           registry: ${{ secrets.DOCKER_REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
 
       - name: Build docker image
         run: scripts/build.sh
@@ -68,4 +68,4 @@ jobs:
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
           VERSION: ${{ matrix.openstack_version }}
           REPOSITORY: osism/openstackclient
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
