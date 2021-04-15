@@ -6,6 +6,8 @@ ARG VERSION=latest
 ARG USER_ID=45000
 ARG GROUP_ID=45000
 
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+
 COPY files/requirements.txt /requirements.txt
 
 RUN apk add --no-cache \
@@ -27,6 +29,7 @@ RUN apk add --no-cache \
        done < /requirements.txt \
     && if [ $VERSION = "rocky" ]; then sed -i '/^python-vitrageclient/d' /requirements/upper-constraints.txt; echo 'python-vitrageclient===2.7.0' >> /requirements/upper-constraints.txt; fi \
     && if [ $VERSION = "rocky" ]; then sed -i '/^cmd2/d' /requirements/upper-constraints.txt; echo 'cmd2===0.8.9' >> /requirements/upper-constraints.txt; fi \
+    && pip3 --no-cache-dir install -U 'pip==21.0.1' \
     && pip3 --no-cache-dir install -c /requirements/upper-constraints.txt -r /packages.txt \
     && pip3 --no-cache-dir install -c /requirements/upper-constraints.txt ospurge \
     && rm -rf /requirements \
