@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION=3.7
 FROM python:${PYTHON_VERSION}-alpine
 
-ARG VERSION=latest
+ARG VERSION=xena
 
 ARG USER_ID=45000
 ARG GROUP_ID=45000
@@ -18,8 +18,8 @@ RUN apk add --no-cache \
       libffi-dev \
       openssl-dev \
       python3-dev \
-    && if [ $VERSION = "latest" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-master.tar.gz; fi \
-    && if [ $VERSION != "latest" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-stable-${VERSION}.tar.gz; fi \
+    && if [ $VERSION = "xena" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-master.tar.gz; fi \
+    && if [ $VERSION != "xena" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-stable-${VERSION}.tar.gz; fi \
     && mkdir /requirements \
     && tar xzf /requirements.tar.gz -C /requirements --strip-components=1 \
     && rm -rf /requirements.tar.gz \
