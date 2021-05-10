@@ -30,6 +30,7 @@ jobs:
           - ussuri
           - victoria
           - wallaby
+          - xena
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
