@@ -53,17 +53,6 @@ jobs:
           VERSION: ${{ matrix.openstack_version }}
           REPOSITORY: osism/openstackclient
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          # yamllint disable-line rule:line-length
-          image-ref: '${{ secrets.DOCKER_REGISTRY }}/osism/openstackclient:${{ github.sha }}'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-
       - name: Push docker image
         run: |
           scripts/push.sh
