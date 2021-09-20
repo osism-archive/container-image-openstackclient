@@ -22,6 +22,9 @@ if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
 fi
 
+mkdir -p $HOME/.config/containers/registries.conf
+echo "unqualified-search-registries = ['"$DOCKER_REGISTRY"']" > $HOME/.config/containers/registries.conf
+
 docker buildx build \
     --load \
     --build-arg "PYTHON_VERSION=$PYTHON_VERSION" \
