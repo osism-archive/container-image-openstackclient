@@ -20,7 +20,7 @@ name: Build container image
 
 jobs:
   build-container-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         openstack_version:

@@ -22,7 +22,15 @@ if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
 fi
 
+mkdir -p "$HOME/.config/containers"
+echo "unqualified-search-registries = ['docker.io']" > "$HOME/.config/containers/registries.conf"
+
+#echo -e '[storage.options]\nmount_program = "/usr/bin/fuse-overlayfs"' > ~/.config/containers/storage.conf
+echo -e '[storage.options]\nmount_program = "/usr/bin/fuse-overlayfs"\n[storage]\ndriver = "overla"' > ~/.config/containers/storage.conf
+
 buildah build-using-dockerfile \
+    --isolation chroot \
+    --storage-driver=vfs \
     --build-arg "PYTHON_VERSION=$PYTHON_VERSION" \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$REVISION" \
