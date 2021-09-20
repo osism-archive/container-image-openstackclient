@@ -1,18 +1,18 @@
 ---
-name: Check docker syntax
+name: Check container syntax
 
 "on":
   push:
     paths:
       - Containerfile
-      - .github/workflows/check-docker-syntax.yml
+      - .github/workflows/check-container-syntax.yml
   pull_request:
     paths:
       - Containerfile
-      - .github/workflows/check-docker-syntax.yml
+      - .github/workflows/check-container-syntax.yml
 
 jobs:
-  check-docker-syntax:
+  check-container-syntax:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1

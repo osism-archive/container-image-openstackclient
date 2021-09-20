@@ -17,7 +17,6 @@ fi
 # push e.g. osism/openstackclient:wallaby
 docker tag "$REPOSITORY:$REVISION" "$REPOSITORY:$VERSION"
 docker push "$REPOSITORY:$VERSION"
-docker rmi "$REPOSITORY:$VERSION"
 
 # push e.g. osism/openstackclient:5.5.0
 version=$(docker run --rm "$REPOSITORY:$VERSION" openstack --version | awk '{ print $2 }')
