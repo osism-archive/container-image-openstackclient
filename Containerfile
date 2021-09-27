@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.7
-FROM python:${PYTHON_VERSION}-alpine
+FROM docker.io/python:${PYTHON_VERSION}-alpine
 
 ARG VERSION=xena
 
