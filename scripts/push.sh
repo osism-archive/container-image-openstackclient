@@ -15,6 +15,7 @@ if [[ -n $DOCKER_REGISTRY ]]; then
 fi
 
 buildah login --password $DOCKER_PASSWORD --username $DOCKER_USERNAME $DOCKER_REGISTRY
+skopeo login --password $DOCKER_PASSWORD --username $DOCKER_USERNAME $DOCKER_REGISTRY
 
 # push e.g. osism/openstackclient:wallaby
 buildah tag "$REPOSITORY:$REVISION" "$REPOSITORY:$VERSION"
@@ -23,7 +24,7 @@ buildah push "$REPOSITORY:$VERSION"
 # push e.g. osism/openstackclient:5.5.0
 version=$(podman run --rm "$REPOSITORY:$VERSION" openstack --version | awk '{ print $2 }')
 
-if DOCKER_CLI_EXPERIMENTAL=enabled buildah manifest inspect "${REPOSITORY}:${version}" > /dev/null; then
+if skopeio inspect "docker://${REPOSITORY}:${version}" > /dev/null; then
     echo "The image ${REPOSITORY}:${version} already exists."
 else
     buildah tag "$REPOSITORY:$REVISION" "$REPOSITORY:$version"
