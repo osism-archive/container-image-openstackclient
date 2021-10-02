@@ -8,7 +8,7 @@ set -x
 # VERSION
 
 DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
- REVISION=$(git rev-parse HEAD)
+REVISION=$(git rev-parse HEAD)
 
 if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
@@ -23,7 +23,7 @@ buildah push "$REPOSITORY:$VERSION"
 # push e.g. osism/openstackclient:5.5.0
 version=$(podman run --rm "$REPOSITORY:$VERSION" openstack --version | awk '{ print $2 }')
 
-if DOCKER_CLI_EXPERIMENTAL=enabled buildah manifest inspect "${REPOSITORY}:${version}" > /dev/null; then
+if skopeo inspect --creds "${DOCKER_USERNAME}:${DOCKER_PASSWORD}" "docker://${REPOSITORY}:${version}" > /dev/null; then
     echo "The image ${REPOSITORY}:${version} already exists."
 else
     buildah tag "$REPOSITORY:$REVISION" "$REPOSITORY:$version"
