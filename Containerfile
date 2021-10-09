@@ -1,12 +1,10 @@
 ARG PYTHON_VERSION=3.7
 FROM python:${PYTHON_VERSION}-alpine
 
-ARG VERSION=xena
+ARG VERSION=yogi
 
 ARG USER_ID=45000
 ARG GROUP_ID=45000
-
-ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 COPY files/requirements.txt /requirements.txt
 
@@ -15,11 +13,13 @@ RUN apk add --no-cache \
       libstdc++ \
     && apk add --no-cache --virtual .build-deps \
       build-base \
+      cargo \
       libffi-dev \
       openssl-dev \
       python3-dev \
-    && if [ $VERSION = "xena" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-master.tar.gz; fi \
-    && if [ $VERSION != "xena" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-stable-${VERSION}.tar.gz; fi \
+      rust \
+    && if [ $VERSION = "yogi" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-master.tar.gz; fi \
+    && if [ $VERSION != "yogi" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-stable-${VERSION}.tar.gz; fi \
     && mkdir /requirements \
     && tar xzf /requirements.tar.gz -C /requirements --strip-components=1 \
     && rm -rf /requirements.tar.gz \
@@ -29,7 +29,7 @@ RUN apk add --no-cache \
        done < /requirements.txt \
     && if [ $VERSION = "rocky" ]; then sed -i '/^python-vitrageclient/d' /requirements/upper-constraints.txt; echo 'python-vitrageclient===2.7.0' >> /requirements/upper-constraints.txt; fi \
     && if [ $VERSION = "rocky" ]; then sed -i '/^cmd2/d' /requirements/upper-constraints.txt; echo 'cmd2===0.8.9' >> /requirements/upper-constraints.txt; fi \
-    && pip3 --no-cache-dir install -U 'pip==21.0.1' \
+    && pip3 --no-cache-dir install --upgrade pip \
     && pip3 --no-cache-dir install -c /requirements/upper-constraints.txt -r /packages.txt \
     && pip3 --no-cache-dir install -c /requirements/upper-constraints.txt ospurge \
     && rm -rf /requirements \
