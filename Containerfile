@@ -1,7 +1,7 @@
 ARG PYTHON_VERSION=3.7
 FROM python:${PYTHON_VERSION}-alpine
 
-ARG VERSION=yogi
+ARG VERSION=yoga
 
 ARG USER_ID=45000
 ARG GROUP_ID=45000
@@ -18,8 +18,8 @@ RUN apk add --no-cache \
       openssl-dev \
       python3-dev \
       rust \
-    && if [ $VERSION = "yogi" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-master.tar.gz; fi \
-    && if [ $VERSION != "yogi" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-stable-${VERSION}.tar.gz; fi \
+    && if [ $VERSION = "yoga" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-master.tar.gz; fi \
+    && if [ $VERSION != "yoga" ]; then wget -P / -O requirements.tar.gz https://tarballs.opendev.org/openstack/requirements/requirements-stable-${VERSION}.tar.gz; fi \
     && mkdir /requirements \
     && tar xzf /requirements.tar.gz -C /requirements --strip-components=1 \
     && rm -rf /requirements.tar.gz \
