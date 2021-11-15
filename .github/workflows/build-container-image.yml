@@ -24,11 +24,6 @@ jobs:
     strategy:
       matrix:
         openstack_version:
-          - rocky
-          - stein
-          - train
-          - ussuri
-          - victoria
           - wallaby
           - xena
           - yoga
@@ -51,4 +46,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           VERSION: ${{ matrix.openstack_version }}
           REPOSITORY: osism/openstackclient
-        if: github.ref == 'refs/heads/main'
+        if: |
+          github.repository == 'osism/container-image-openstackclient' &&
+          github.ref == 'refs/heads/main'
